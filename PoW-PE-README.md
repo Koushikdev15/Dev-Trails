@@ -1,297 +1,374 @@
-# ⚙ PoW-PE — Proof-of-Work Presence Engine
+# ◈ HustleGuard — AI-Powered Parametric Income Insurance for India's Gig Economy
 
-> *Shifting fraud detection from validating coordinates to verifying the irreducible fingerprint of human presence.*
-
-![Status](https://img.shields.io/badge/Status-Proposal-blue)
-![Architecture](https://img.shields.io/badge/Type-Anti--Fraud%20Architecture-purple)
-![Domain](https://img.shields.io/badge/Domain-Gig%20Economy-green)
-![Layers](https://img.shields.io/badge/Layers-8-cyan)
-![Signals](https://img.shields.io/badge/Signals-Multi--Signal-teal)
+> **Guidewire DEVTrails 2026 | Phase 1 Submission**
+> Protecting the Heartbeat of India's Delivery Economy
 
 ---
 
-## Table of Contents
+## ▣ Problem Statement
 
-1. [The Problem We're Solving](#1-the-problem-were-solving)
-2. [The Central Hypothesis](#2-the-central-hypothesis)
-3. [System Architecture](#3-system-architecture)
-4. [Component Deep-Dives](#4-component-deep-dives)
-   - [Stage 01 — Smart Claim Trigger](#stage-01--smart-claim-trigger)
-   - [Stage 02 — Multi-Signal Data Capture](#stage-02--multi-signal-data-capture)
-   - [Stage 03 — Motion Fingerprinting](#stage-03--motion-fingerprinting-high-weight)
-   - [Stage 04 — Behavioral Entropy Engine](#stage-04--behavioral-entropy-engine-high-weight)
-   - [Stage 05 — Swarm Intelligence Detection](#stage-05--swarm-intelligence-detection-high-weight)
-   - [Stage 06 — Environment Cross-Validation](#stage-06--environment-cross-validation-medium-weight)
-   - [Stage 07 — Temporal Consistency Analysis](#stage-07--temporal-consistency-analysis-medium-weight)
-   - [Stage 08 — Trust Evolution Model](#stage-08--trust-evolution-model-medium-weight)
-5. [Signal Fusion & Scoring](#5-signal-fusion--scoring)
-6. [Decision Engine](#6-decision-engine)
-7. [Key Innovations](#7-key-innovations)
-8. [Expected Outcomes](#8-expected-outcomes)
-9. [Roadmap](#9-roadmap)
+India's platform-based delivery partners — working for Zomato, Swiggy, Zepto, Blinkit, Amazon, and Flipkart — are the invisible backbone of the digital economy. Yet they remain completely exposed to uncontrollable external disruptions:
+
+- **Extreme weather** (heatwaves, floods, cyclones, heavy rain)
+- **Severe pollution** (AQI spikes making outdoor work dangerous)
+- **Social disruptions** (unplanned curfews, local strikes, zone closures)
+
+When these events strike, gig workers lose **20–30% of their monthly earnings** with zero financial safety net. No claims process. No compensation. Just lost income.
+
+> **Coverage scope:** Income loss ONLY. No health, life, accident, or vehicle repair coverage.
 
 ---
 
-## 1. The Problem We're Solving
+## ◉ Our Persona
 
-Modern gig-economy platforms increasingly offer **disruption-based compensation** — payouts triggered when workers cannot work due to weather events, infrastructure failures, or zone-level disruptions. These systems, while well-intentioned, carry a fundamental vulnerability: **they rely on location data as the primary — often sole — signal of a genuine claim.**
+**Grocery & Q-Commerce Delivery Partners** — Zepto / Blinkit / Swiggy Instamart
 
-| Issue | Detail |
-|---|---|
-| **◆ Attack Vector** | GPS spoofing tools are widely available, freely distributed, and require minimal technical skill to deploy against single-signal detection systems. |
-| **◆ Scale of Exposure** | At scale, even a modest fraud rate across thousands of daily claims amounts to millions in illegitimate payouts per quarter, eroding platform trust. |
-| **⚠ Core Flaw** | Existing systems ask *"Is the location correct?"* — not *"Is this a real worker behaving like a real human in a real disruption?"* The distinction is everything. |
+These workers operate in dense urban zones with extremely tight delivery windows (10–15 minutes). They face the highest exposure to hyperlocal weather events, waterlogging, and sudden AQI spikes. Their income is highly time-sensitive, making even 2–3 lost hours per week financially devastating.
 
----
+### Persona Scenarios
 
-## 2. The Central Hypothesis
-
-PoW-PE is built on a single, powerful insight: **fraud is fundamentally constrained by human cognitive and physical limits.** A fraudster can simulate a location. They cannot simultaneously simulate every dimension of human existence at a location.
-
-### What a Fraudster Can and Cannot Fake
-
-**A fraudster CAN fake:**
-- ✓ A GPS coordinate
-- ✓ A single timestamp
-- ✓ A geofence check
-
-**A fraudster CANNOT fake:**
-- ✗ The **organic irregularity** of real human movement
-- ✗ The **entropy patterns** of genuine user interaction
-- ✗ **Environmental data correlation** at a physical location
-- ✗ The **natural distribution** of real disruption claim timing
-- ✗ A **long-term trust history** built through consistent behavior
-
----
-
-## 3. System Architecture
-
-The PoW-PE pipeline processes every disruption claim through a sequential and parallel multi-layer analysis before any payout is made.
-
-```
-┌─────────────────────────────────┐
-│    ◉  Disruption Event Detected  │  ← Entry Point
-└─────────────────┬───────────────┘
-                  ▼
-┌─────────────────────────────────┐
-│   Stage 1: Smart Claim Trigger   │  Opens verification window · Suspends payout
-└─────────────────┬───────────────┘
-                  ▼
-┌─────────────────────────────────┐
-│ Stage 2: Multi-Signal Data       │  GPS · Motion · App State · Interactions · History
-│         Capture                  │
-└─────────────────┬───────────────┘
-                  ▼
-  ┌───────┬───────┬───────┬───────┬───────┬───────┐
-  │ Stg 3 │ Stg 4 │ Stg 5 │ Stg 6 │ Stg 7 │ Stg 8 │
-  │Motion │Behav. │Swarm  │Environ│Tempor │Trust  │
-  │Fprint │Entropy│Intel. │Validat│Consist│Evol.  │
-  └───────┴───────┴───────┴───────┴───────┴───────┘
-                  ▼
-┌─────────────────────────────────┐
-│    Fusion Layer: Unified Risk    │  Weighted signal fusion → Composite risk 0.00–1.00
-│    Scorer                        │
-└─────────────────┬───────────────┘
-                  ▼
-┌─────────────────────────────────┐
-│    Output: Decision Engine       │  Pay · Review · Block
-└─────────────────────────────────┘
-```
-
----
-
-## 4. Component Deep-Dives
-
-### Stage 01 — Smart Claim Trigger
-
-When a disruption event is registered, the system does not process claims immediately. It opens a **bounded verification window** — a time interval during which all telemetry is silently recorded before any payout decision is made.
-
-This introduces natural friction that discourages low-effort fraud without affecting genuine workers, who simply continue normal activity. The trigger logs exact disruption parameters — zone boundaries, start time, severity level — used as baseline references throughout cross-validation.
-
----
-
-### Stage 02 — Multi-Signal Data Capture
-
-Rather than capturing a single GPS coordinate, the system records a **continuous, time-stamped telemetry stream** across multiple signal categories. This rich dataset feeds every downstream layer, ensuring no single compromised signal can override the rest.
-
-| Signal Category | Data Points Captured |
-|---|---|
-| **Spatial** | GPS stream, altitude, accuracy radius over time |
-| **Kinematic** | Speed, acceleration, heading, step count |
-| **Device State** | App foreground/background, screen activity |
-| **Interaction** | Tap events, swipe gestures, submission timing |
-| **Historical** | Prior movement traces, past claim locations, baselines |
-
----
-
-### Stage 03 — Motion Fingerprinting `HIGH WEIGHT`
-
-Every person moves differently. A delivery worker navigating a congested area leaves a kinematic signature physically constrained by their environment, mode of transport, and natural human variability. The Motion Fingerprinting module generates a **movement profile** and compares it against both physical laws and the worker's historical baseline.
-
-- **▸ Drift patterns** — Does the position stream show micro-corrections and natural drift, or the suspiciously clean path of a GPS injection script?
-- **▸ Speed plausibility** — Does any claimed speed defy physical constraints, such as 0 to 80 km/h instantaneously?
-- **▸ Path continuity** — Are there teleportation-like coordinate jumps that cannot be explained by signal loss?
-- **▸ Stillness authenticity** — If stationary, does the device exhibit the micro-jitter characteristic of real held hardware?
-
----
-
-### Stage 04 — Behavioral Entropy Engine `HIGH WEIGHT`
-
-> *"Humans are predictably unpredictable. Our actions contain measurable, organic randomness that automated scripts cannot naturally replicate."*
-
-The engine computes a **Shannon entropy score** — a mathematical measure of information randomness derived from interaction timing, micro-interaction variance, and claim submission behavior.
-
-| Profile | Entropy Level | Result |
+| Scenario | Trigger | Worker Impact |
 |---|---|---|
-| Real Human | ████████████████░░░ 85% | ▸ High Entropy — **Pass** |
-| Fraud Script | █████░░░░░░░░░░░░░░ 28% | ▸ Low Entropy — **Flag** |
-
-Real humans exhibit high entropy; fraud scripts execute with machine-level precision and low entropy — completely invisible to the genuine user, and nearly impossible for automated systems to fake at scale.
-
----
-
-### Stage 05 — Swarm Intelligence Detection `HIGH WEIGHT`
-
-Individual fraud is damaging. Coordinated fraud rings are catastrophic. This layer analyzes workers **as a collective population**, applying unsupervised clustering to identify statistically improbable similarities across independent accounts.
-
-When cross-account similarity exceeds a defined threshold, the accounts are flagged as a potential ring — regardless of whether each individual would have passed standalone checks.
-
-- **▸ Temporal synchronization** — Claims submitted within an unnaturally tight time window across multiple accounts
-- **▸ Behavioral cloning** — Nearly identical interaction patterns, timing signatures, or motion traces across independent accounts
-- **▸ Spatial clustering** — Positions suspiciously concentrated at the exact center of a disruption zone rather than distributed organically
+| Rajan, Bengaluru | Sudden heavy rain + waterlogging | 4 hrs lost, ₹480 income gone |
+| Priya, Delhi | AQI > 400, outdoor advisory issued | Full day halted, ₹900 lost |
+| Arjun, Mumbai | Local curfew, zone locked down | Zone inaccessible for 6 hrs |
+| Karthik, Chennai | Cyclone warning, all deliveries paused | 2-day blackout, ₹1,800 lost |
 
 ---
 
-### Stage 06 — Environment Cross-Validation `MEDIUM WEIGHT`
+## ◆ Our Solution: HustleGuard
 
-Genuine disruptions leave physical evidence in the world. The system queries real-time and historical environmental data APIs to verify that the claimed disruption actually occurred as described. A claim with no corroborating environmental evidence — regardless of GPS accuracy — receives a significantly elevated risk score.
+**HustleGuard** is a parametric income insurance platform that pays gig workers automatically — without any claims filing — the moment a verified disruption hits their operating zone.
 
-- **▸ Weather APIs** — Precipitation, wind, and temperature data at the claimed location and time
-- **▸ Air quality sensors** — For environmental or industrial disruptions, sensor readings must corroborate the claim
-- **▸ Area activity signals** — Traffic, transit, and commercial activity data showing expected suppression during genuine events
+No paperwork. No waiting. Just instant income protection.
 
----
+### What makes us different
 
-### Stage 07 — Temporal Consistency Analysis `MEDIUM WEIGHT`
-
-Fraud attacks have a characteristic shape when viewed across time. This module models the **expected claim arrival curve** for genuine disruptions and compares it against observed submissions.
-
-- **Real disruptions** produce a smooth, organic ramp-up in claims
-- **Fraud attacks** produce sudden synchronized spikes the moment an event window opens
-- The module also detects **retroactive anomalies** — workers who "appeared" in the zone only moments before the window opened
+While traditional insurance asks *"What happened to you?"*, HustleGuard asks *"What's happening in your zone right now?"* — and pays before the worker even realizes they've lost income.
 
 ---
 
-### Stage 08 — Trust Evolution Model `MEDIUM WEIGHT`
+## ⬡ Full Technical Workflow
 
-Not all workers should be evaluated identically. A worker with three years of consistent, clean claims deserves a different baseline assumption than a new account with no history.
+```
+┌──────────────────────────────────────────────────────────────┐
+│                    HUSTLEGUARD PLATFORM                        │
+│                                                              │
+│  Worker App  →  Onboarding Engine  →  Policy Engine          │
+│       ↓                                    ↓                 │
+│  Zone Mapping     Risk Profiler (ML)   Weekly Premium        │
+│       ↓                                    ↓                 │
+│  Parametric     ←── Environmental     Trigger Monitor        │
+│  Trigger Layer       Data Feeds       (Real-time)            │
+│       ↓                                    ↓                 │
+│  Fraud Detection  →  Risk Scorer  →  Decision Engine         │
+│  (PoW-PE Layer)                           ↓                  │
+│                                    Payout Engine             │
+│                                    (UPI / Wallet)            │
+│                                           ↓                  │
+│                              Analytics Dashboard             │
+└──────────────────────────────────────────────────────────────┘
+```
 
-The Trust Evolution Model maintains a **dynamic, longitudinal trust score** for each worker, updated after every verified interaction. This score acts as a Bayesian prior in the risk calculation.
+### Step 1 — Smart Onboarding
 
-- **▸** Successful verified claims increase trust incrementally over time
-- **▸** Flagged or blocked claims produce significant trust reduction
-- **▸** Sudden behavioral shifts or inactivity periods trigger re-evaluation
-- **▸** Geographic consistency in familiar operating areas builds supplementary confidence
+Workers register via a lightweight mobile app (Android-first, Hindi + English + regional language support). During onboarding, the system captures:
 
-> Reliable workers benefit from expedited verification; new or flagged accounts face higher scrutiny thresholds — without punishing the innocent.
+- Platform affiliation (Zepto / Blinkit / Swiggy Instamart)
+- Primary operating zones (up to 3 pin codes)
+- Average weekly earnings (self-declared + platform API cross-check)
+- Device fingerprint + phone number (for fraud baseline)
+- Aadhaar-based KYC (via DigiLocker integration)
+
+The onboarding feeds directly into the **Risk Profiler**.
 
 ---
 
-## 5. Signal Fusion & Scoring
+### Step 2 — AI Risk Profiling & Weekly Premium Engine
 
-All analytical layers feed a **weighted fusion layer** producing a single composite risk score between `0.00` and `1.00`. Weights are dynamically adjusted based on disruption type, geographic region, and seasonal fraud pattern models.
+The ML-based Risk Profiler generates a **Hyper-Local Risk Index (HLRI)** for each worker's operating zones.
 
-| Signal Layer | Weight | Rationale |
+**Inputs to HLRI:**
+- Historical weather severity for the pin code (past 3 years)
+- Historical AQI data for the zone
+- Historical disruption frequency (curfews, strikes)
+- Worker's average active hours per week
+- Platform order volume density (proxy for income potential)
+
+**Premium Calculation Formula:**
+
+```
+Weekly Premium = Base Rate × Zone Risk Multiplier × Coverage Tier Factor × Loyalty Discount
+
+Base Rate       = ₹25/week (Tier 1 coverage)
+Zone Multiplier = 0.8 (low-risk zone) to 1.5 (high-risk flood/AQI zone)
+Coverage Tier   = Tier 1 (₹500/day max) | Tier 2 (₹800/day max) | Tier 3 (₹1200/day max)
+Loyalty Discount= 5% after 4 consecutive claim-free weeks
+```
+
+**Example Premiums:**
+
+| Worker Zone | Risk Level | Coverage Tier | Weekly Premium |
+|---|---|---|---|
+| Bengaluru Koramangala | Medium | Tier 2 | ₹38 |
+| Delhi Rohini | High (AQI) | Tier 2 | ₹52 |
+| Mumbai Andheri | High (Flood) | Tier 3 | ₹71 |
+| Chennai Anna Nagar | Medium | Tier 1 | ₹29 |
+
+Premiums are dynamically re-calculated every Sunday night for the upcoming week based on live forecast data.
+
+---
+
+### Step 3 — Parametric Trigger Monitoring (5 Automated Triggers)
+
+HustleGuard does not wait for workers to file claims. A real-time **Environmental Intelligence Engine** polls multiple data sources every 15 minutes:
+
+#### Trigger 1 — Rainfall Intensity Trigger
+- **API:** OpenWeatherMap + IMD (India Meteorological Department) alerts
+- **Threshold:** Rainfall > 15mm/hour sustained for 30+ minutes in worker's zone
+- **Action:** Automatic claim initiation for all active policyholders in the zone
+
+#### Trigger 2 — AQI Emergency Trigger
+- **API:** CPCB (Central Pollution Control Board) real-time AQI feed
+- **Threshold:** AQI > 350 (Very Poor category) for 2+ consecutive hours
+- **Action:** Covers income loss during advisory windows
+
+#### Trigger 3 — Heatwave Trigger
+- **API:** IMD heatwave alerts + OpenWeatherMap
+- **Threshold:** Temperature > 44°C for 3+ hours, combined with IMD official advisory
+- **Action:** Triggers hourly income protection payouts
+
+#### Trigger 4 — Zone Lockdown / Curfew Trigger
+- **API:** Local government RSS feeds + Twitter/X keyword monitoring (scraper)
+- **Threshold:** Official curfew or Section 144 notice for worker's pin code
+- **Action:** Full-day income protection for affected zones
+
+#### Trigger 5 — Platform Outage Trigger
+- **API:** Platform health monitoring (simulated mock API)
+- **Threshold:** Delivery app downtime > 45 minutes in worker's registered zone
+- **Action:** Partial hourly payout during confirmed downtime window
+
+---
+
+### Step 4 — Proof-of-Work Presence Engine (PoW-PE) — Fraud Detection
+
+> **Market Crash Defense: Adversarial Anti-Spoofing Architecture**
+
+Our fraud detection system goes far beyond GPS verification. It generates a **Proof of Real Presence (PoRP)** score by verifying that a real human worker was genuinely active in the disrupted zone.
+
+The core question is not *"Is the GPS correct?"* — it is *"Is this a real worker behaving like a real human in a real disruption?"*
+
+#### Layer 1 — Motion Fingerprinting
+- Analyzes GPS time-series (not a single point snapshot)
+- Detects unrealistic teleportation jumps, perfect-grid paths, or static spoofing
+- Validates that movement follows real-world physical constraints (speed, acceleration profiles)
+- Flags GPS streams with sub-millisecond timestamp precision (device emulator signature)
+
+#### Layer 2 — Behavioral Entropy Engine
+- Computes an entropy (randomness) score from interaction timing, route micro-deviations, and background/foreground app switching patterns
+- Real human workers exhibit **high entropy** (naturally variable behavior)
+- Fraud scripts exhibit **low entropy** (mechanically uniform behavior)
+- Threshold: entropy score < 0.35 flags for manual review
+
+#### Layer 3 — Swarm Intelligence Detection (Fraud Ring Detection)
+- Clusters workers by behavioral similarity using DBSCAN unsupervised learning
+- Detects synchronized claim submissions (multiple workers claiming from the same coordinates at the same millisecond)
+- Identifies identical GPS path patterns shared across multiple device IDs
+- A coordinated fraud ring of 500 fake GPS workers would be caught because their behavioral entropy would be near-identical — a statistical impossibility in genuine human behavior
+
+#### Layer 4 — Environmental Cross-Validation
+- Cross-references worker's claimed location against the actual disruption zone boundary (geofenced polygon from weather API)
+- Validates that local environmental sensor readings (pollution, rainfall) match claim type
+- Rejects claims from zones where no disruption was officially recorded
+
+#### Layer 5 — Temporal Anomaly Detection
+- Real disruptions show gradual claim volume increase as news spreads
+- Coordinated fraud attacks show a sudden synchronized spike
+- Time-series anomaly detection (Isolation Forest algorithm) flags unnatural claim velocity
+
+#### Layer 6 — Dynamic Trust Score
+Each worker carries a rolling **Trust Score (0–100)** updated after every interaction:
+
+| Trust Score | Status | Claim Processing |
 |---|---|---|
-| Motion Fingerprinting | ◆◆◆ **High** | Directly tied to physical presence verification |
-| Behavioral Entropy | ◆◆◆ **High** | Distinguishes organic humans from automated scripts |
-| Swarm Detection | ◆◆◆ **High** | Catches organized ring attacks that evade individual checks |
-| Environmental Validation | ◆◆ **Medium** | Confirms the disruption event existed in the world |
-| Temporal Consistency | ◆◆ **Medium** | Flags unnatural timing patterns and synchronized spikes |
-| Trust Score | ◆◆ **Medium** | Applies longitudinal behavioral history as context prior |
+| 80–100 | Trusted | Instant auto-payout |
+| 50–79 | Standard | Payout within 2 hours |
+| 20–49 | Watchlisted | Manual review required |
+| 0–19 | Flagged | Blocked, investigation triggered |
+
+New workers start at Trust Score 60. Trust increases with clean claim history and decreases with suspicious signals.
+
+#### Unified Risk Score Decision Matrix
+
+```
+Risk Score = w1×Motion + w2×Entropy + w3×Swarm + w4×Environment + w5×Temporal + w6×Trust
+
+Score < 30  → Instant payout
+Score 30–60 → Delayed / partial payout (up to 2 hrs)
+Score > 60  → Blocked + flagged for fraud investigation
+```
 
 ---
 
-## 6. Decision Engine
+### Step 5 — Payout Engine
 
-The composite risk score maps directly to one of three automated decision outcomes:
+Verified claims trigger instant payouts via:
 
-| Risk Score | Risk Level | Action |
-|---|---|---|
-| `0.00 – 0.35` | 🟢 **Low Risk** | Instant automated payout. No human intervention required. |
-| `0.35 – 0.65` | 🟡 **Medium Risk** | Delayed or partial payout. Enters lightweight manual review queue. |
-| `0.65 – 1.00` | 🔴 **High Risk** | Blocked, logged, and escalated. Flagged signals surfaced for investigation. |
+- **Primary:** UPI direct transfer (Razorpay/PhonePe integration)
+- **Secondary:** In-app wallet (for workers without UPI)
+- **Payout calculation:** Hourly income rate × verified disruption hours × coverage tier multiplier
 
----
+Workers receive a WhatsApp notification: *"Your zone experienced [disruption]. ₹[amount] has been credited to your UPI account."*
 
-## 7. Key Innovations
-
-### ① Location Verification → Human Verification
-The system treats GPS as one signal among many, not the primary gate. This eliminates the entire attack surface that GPS spoofing tools exploit, forcing fraudsters to solve a vastly harder multi-dimensional problem.
-
-### ② Passive Entropy-Based Humanity Testing
-Rather than challenging users with explicit tests or CAPTCHAs, the system passively measures behavioral entropy — completely invisible to genuine users, and nearly impossible for automated systems to fake at scale.
-
-### ③ Population-Level Fraud Ring Intelligence
-By analyzing workers as a collective population rather than individuals, the system surfaces coordinated fraud rings specifically designed to evade all per-user detection — the most sophisticated attack vector against disruption payouts.
-
-### ④ Living Trust Profiles
-Worker trust scores evolve continuously, creating a self-improving ecosystem: genuine workers earn expedited verification over time, while the system maintains elevated scrutiny where warranted — without punishing the innocent.
-
-### ⑤ Computationally Impractical Fraud Surface
-Because all signal layers must be simultaneously satisfied to receive a payout, the cost and complexity of successful fraud becomes prohibitively high. Defeating one layer while failing others is sufficient for detection — making comprehensive fraud **economically irrational**.
+Zero action required from the worker.
 
 ---
 
-## 8. Expected Outcomes
+### Step 6 — Analytics Dashboard
 
-| Challenge | How PoW-PE Addresses It |
+**Worker View:**
+- Weekly income protected (cumulative)
+- Active coverage status
+- Trust score + claim history
+- Upcoming weather risk for their zones
+
+**Insurer / Admin View:**
+- Real-time loss ratio by zone
+- Predictive analytics: next week's likely claim volume based on weather forecasts
+- Fraud ring detection alerts
+- Premium vs. payout P&L by zone and tier
+
+---
+
+## ⬢ Tech Stack
+
+### Frontend
+| Layer | Technology |
 |---|---|
-| GPS spoofing by individual fraudsters | ✦ Motion fingerprinting + entropy analysis detects device-only fraud without physical presence |
-| Coordinated fraud ring attacks | ✦ Swarm intelligence identifies synchronized cross-account patterns invisible to per-user checks |
-| False positives harming genuine workers | ✦ Multi-layer validation and trust scores minimize incorrect flags, protecting legitimate workers |
-| Slow or manual payout processing | ✦ Low-risk claims receive instant automated payout with zero human intervention required |
-| Fraud patterns evolving over time | ✦ Trust models and signal weights adapt continuously through operational learning loops |
-| New accounts without behavioral history | ✦ Environmental and motion signals provide standalone verification independent of history |
+| Mobile App | React Native (Android-first) |
+| Web Dashboard | React.js + Tailwind CSS |
+| Language Support | i18n (Hindi, Tamil, Telugu, English) |
+
+### Backend
+| Layer | Technology |
+|---|---|
+| API Server | Node.js + Express.js |
+| Authentication | Firebase Auth + Aadhaar OTP |
+| Database | PostgreSQL (relational) + Redis (real-time cache) |
+| Message Queue | Apache Kafka (trigger event streaming) |
+
+### AI/ML
+| Component | Technology |
+|---|---|
+| Risk Profiling | Python + scikit-learn (Random Forest) |
+| Fraud Detection | Python + DBSCAN clustering + Isolation Forest |
+| Behavioral Entropy | Custom entropy scoring module (Python) |
+| Premium Prediction | XGBoost regression model |
+| Model Serving | FastAPI inference server |
+
+### Integrations
+| Integration | API / Service |
+|---|---|
+| Weather Data | OpenWeatherMap API + IMD RSS feeds |
+| AQI Data | CPCB Open Data API |
+| Maps & Geofencing | Google Maps Platform |
+| Payments | Razorpay (test mode) / UPI mock |
+| KYC | DigiLocker API (mock) |
+| Platform APIs | Simulated Zepto/Blinkit order feed |
+
+### Infrastructure
+| Layer | Technology |
+|---|---|
+| Cloud | AWS (EC2 + RDS + S3) |
+| Containerization | Docker + Docker Compose |
+| CI/CD | GitHub Actions |
+| Monitoring | Grafana + Prometheus |
 
 ---
 
-## 9. Roadmap
+## ◷ Weekly Premium Model
+
+HustleGuard operates on a **Sunday-to-Saturday** weekly policy cycle aligned with gig workers' typical weekly earning cycles.
 
 ```
-Phase 1  ──●  Core Signal Capture Pipeline + Motion Fingerprinting
-              Establish telemetry stream infrastructure and deploy foundational
-              movement analysis across all active workers.
-
-Phase 2  ──●  Behavioral Entropy Engine + Trust Model Integration
-              Build entropy scoring from interaction data and seed initial trust
-              scores from historical claim records.
-
-Phase 3  ──●  Swarm Intelligence Detection + Fraud Ring Alerting
-              Deploy unsupervised clustering for population-level fraud ring
-              detection with real-time alerting capabilities.
-
-Phase 4  ──●  Environmental API Integration + Temporal Modelling
-              Connect weather, pollution, and area activity data sources. Build
-              expected claim distribution models per disruption type.
-
-Phase 5  ──●  Unified Risk Scorer Tuning + Decision Engine Deployment
-              Calibrate signal weights against labeled historical data and deploy
-              the full end-to-end scoring and decision pipeline.
-
-Phase 6  ──●  Continuous Learning Loop + Regional Model Adaptation
-              Implement feedback loops from manual review decisions and develop
-              region-specific fraud pattern models for global scalability.
+Sunday Midnight  → New week policy activated, premium auto-deducted
+Monday–Saturday  → Real-time monitoring + instant payouts if triggered
+Saturday 11:59pm → Week closes, loyalty metrics updated
+Sunday Midnight  → New premium calculated using fresh HLRI
 ```
 
----
-
-## Design Philosophy
-
-PoW-PE is designed with **genuine workers at its center** — faster payouts, fairer outcomes, and a fraud-resistant ecosystem for everyone.
-
-The system's fundamental premise is that *human presence cannot be fully simulated*. By anchoring fraud detection in the irreducible complexity of real human behavior — rather than a single spoofable coordinate — PoW-PE raises the cost of fraud to a level that makes it economically and technically impractical, while simultaneously making the experience for honest workers faster and more seamless.
+Workers can opt in/out weekly — no lock-in, no minimum commitment. Premiums are deducted from the worker's platform wallet or UPI directly.
 
 ---
 
-*⚙ Proof-of-Work Presence Engine · System Architecture Proposal*
+## ◈ Platform Choice: Mobile-First Web App (PWA)
+
+We chose a **Progressive Web App (PWA)** approach because:
+
+- Delivery partners primarily use mid-range Android phones
+- PWA eliminates app store friction — shareable via WhatsApp link
+- Works offline with cached policy data
+- 60–70% lower data consumption vs native app
+- Can be white-labeled and embedded within Zepto/Blinkit partner apps
+
+---
+
+## ◎ Impact & Benefits
+
+### For Gig Workers
+- **Financial Security:** Up to ₹1,200/day income replacement during verified disruptions
+- **Zero Friction:** No claims to file — payouts happen automatically
+- **Affordable:** Starting from ₹25/week (~₹100/month), less than 1% of average weekly earnings
+- **Transparent:** Full visibility into coverage, trust score, and claim history
+
+### For the Platform (Insurer)
+- **Fraud Resistance:** Multi-layer PoW-PE architecture makes coordinated GPS fraud economically unviable
+- **Low Loss Ratio:** Parametric + fraud detection keeps claim manipulation near zero
+- **Scalable:** Event-driven architecture handles millions of simultaneous trigger evaluations
+- **Data Moat:** Behavioral entropy and trust data creates a proprietary fraud-detection asset over time
+
+### For Society
+- **Financial Inclusion:** Brings formal insurance to 15M+ uninsured gig workers in India
+- **Reduced Inequality:** Safety net prevents gig workers from falling into debt cycles after disruptions
+- **Economic Resilience:** Workers protected during climate events can return to work faster, maintaining delivery ecosystem uptime
+
+### Business Viability Snapshot
+
+| Metric | Estimate |
+|---|---|
+| Target market (gig workers, India) | ~15 million |
+| Addressable segment (Q-Commerce focus) | ~2 million |
+| Average weekly premium | ₹42 |
+| Annual revenue per worker | ₹2,184 |
+| Target Year 1 enrollment | 50,000 workers |
+| Projected Year 1 premium revenue | ₹10.9 Cr |
+
+---
+
+## ◫ Development Plan (6-Week Roadmap)
+
+| Phase | Weeks | Focus | Key Deliverables |
+|---|---|---|---|
+| Phase 1 | Weeks 1–2 | Ideation & Foundation | README, persona research, architecture design |
+| Phase 2 | Weeks 3–4 | Automation & Protection | Worker app MVP, premium engine, 5 parametric triggers, claims pipeline |
+| Phase 3 | Weeks 5–6 | Scale & Optimise | Fraud detection full stack, payout simulation, dual dashboard, pitch deck |
+
+---
+
+## ◬ Adversarial Defense Summary (Market Crash Response)
+
+> *500 delivery partners. Fake GPS. Coordinated fraud ring. How do we stop them?*
+
+Simple GPS verification is dead. HustleGuard's PoW-PE defeats coordinated fraud rings because:
+
+1. **You can spoof one GPS signal** — you cannot simultaneously fake behavioral entropy across 500 distinct human interaction patterns
+2. **You can synchronize 500 fake claims** — but synchronized behavior is the very signature we detect with Swarm Intelligence clustering
+3. **You can fake a location** — you cannot fake matching it to a real geofenced disruption zone that no weather API recorded
+4. **First-time fraudsters start at Trust Score 60** — they cannot instantly achieve trusted status, limiting damage even if they slip through once
+5. **Temporal velocity detection** catches the unnatural spike before mass payouts are processed
+
+A coordinated ring of 500 fake GPS workers would be flagged and blocked within the first 3 minutes of their synchronized claim submission.
+
+---
+
+*HustleGuard — Built for DEVTrails 2026. Protecting India's gig workers, one week at a time.*
